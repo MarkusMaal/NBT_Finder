@@ -56,21 +56,32 @@ namespace NBT_Finder
         /// <summary>
         /// Search for NBT data on all drives
         /// </summary>
-        public static void WalkTrees()
+        public static void WalkTrees(string root = "")
         {
             Console.WriteLine("Initializing...");
             Utils.MakeDirs();
-            foreach (DriveInfo d in DriveInfo.GetDrives())
+            if (root == "")
             {
-                if (!d.IsReady) continue;
-                if (d.DriveType == DriveType.Network) continue; // avoid network drives, because we can't determine symlinks easily
+                foreach (DriveInfo d in DriveInfo.GetDrives())
+                {
+                    if (!d.IsReady) continue;
+                    if (d.DriveType == DriveType.Network) continue; // avoid network drives, because we can't determine symlinks easily
+                    new Thread(() =>
+                    {
+                        CurThreads++;
+                        RecurseTree(d.RootDirectory.FullName);
+                        CurThreads--;
+                    }
+                    ).Start();
+                }
+            } else
+            {
                 new Thread(() =>
                 {
                     CurThreads++;
-                    RecurseTree(d.RootDirectory.FullName);
+                    RecurseTree(root);
                     CurThreads--;
-                }
-                ).Start();
+                }).Start();
             }
             Thread CLThread = new(CLIThread);
             CLThread.Start();

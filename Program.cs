@@ -28,12 +28,7 @@ public class Program
             Console.ReadKey();
             Console.WriteLine();
         }
-        if (args.Length == 0)
-        {
-            DeepSearch.WalkTrees();
-            return;
-        }
-        string root = args[0];
-        RecupDirFinder.FindMcData(root);
+        DeepSearch.WalkTrees((args.Length == 0) ? "" : args[0]);
+        /*RecupDirFinder.FindMcData(args[0]);*/
     }
 }

@@ -1,7 +1,8 @@
 {
   "profiles": {
     "NBT_Finder": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "\"D:\\Users\\MarkusMaal\\Documents\\MEGA\\markuse asjad\\markuse asjad\\Markus\\Muud asjad\\Andmetaastused\""
     }
   }
 }

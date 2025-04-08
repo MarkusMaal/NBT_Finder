@@ -1,8 +1,7 @@
 {
   "profiles": {
     "NBT_Finder": {
-      "commandName": "Project",
-      "commandLineArgs": "D:\\Varukoopiad\\Taasted\\hdd160"
+      "commandName": "Project"
     }
   }
 }
